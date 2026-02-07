@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -10,6 +11,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  title: "Equilibrium | Financial Conviction Engine",
+  description: "A generative financial tool to visualize wealth, build resilience, and achieve life goals.",
+};
 
 export default function RootLayout({
   children,
@@ -26,3 +32,4 @@ export default function RootLayout({
     </html>
   );
 }
+

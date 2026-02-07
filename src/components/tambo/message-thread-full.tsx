@@ -70,21 +70,21 @@ export const MessageThreadFull = React.forwardRef<
   const defaultSuggestions: Suggestion[] = [
     {
       id: "suggestion-1",
-      title: "Get started",
-      detailedSuggestion: "What can you help me with?",
-      messageId: "welcome-query",
+      title: "📈 Growth Simulation",
+      detailedSuggestion: "What if I invest $10,000 at 7% return for 20 years?",
+      messageId: "growth-query",
     },
     {
       id: "suggestion-2",
-      title: "Learn more",
-      detailedSuggestion: "Tell me about your capabilities.",
-      messageId: "capabilities-query",
+      title: "🔥 Inflation Impact",
+      detailedSuggestion: "What if I save $2,000 a month but inflation stays at 5%?",
+      messageId: "inflation-query",
     },
     {
       id: "suggestion-3",
-      title: "Examples",
-      detailedSuggestion: "Show me some example queries I can try.",
-      messageId: "examples-query",
+      title: "🏝️ Early Retirement",
+      detailedSuggestion: "Can I retire in 15 years if I start with $100k and save $5k a month?",
+      messageId: "retirement-query",
     },
   ];
 

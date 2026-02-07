@@ -1,131 +1,37 @@
-# Tambo Template
+# Equilibrium.ai | Maximize Human Potential
 
-This is a starter NextJS app with Tambo hooked up to get your AI app development started quickly.
+**Equilibrium** is a generative financial conviction engine built for the **UI Strikes Back Hackathon** conducted by *WeMakeDevs*. It moves beyond static spreadsheets to provide a behavioral coaching interface that helps users visualize their financial future with certainty and resilience.
 
-## Get Started
+## 🚀 The Vision
+Most people suffer from financial anxiety due to complexity and short-term market noise. Equilibrium uses **Generative UI** to bridge the gap between abstract market data and personal life goals, empowering users to reach their maximum potential through three key psychological triggers:
+- **Loss Aversion:** Visualizing the "Procrastination Tax" (The cost of waiting 5 years).
+- **Resilience:** Stress-testing goals against 30% market crashes via the "Panic Mode" simulator.
+- **Clarity:** Mapping specific life milestones (e.g., "Retirement" or "Dream Home") directly onto the wealth vector.
 
-1. Run `npm create-tambo@latest my-tambo-app` for a new project
+## 🛠️ Tech Stack
+- **Framework:** Next.js 15 (App Router)
+- **AI Orchestration:** [Tambo SDK](https://tambo.co)
+- **Data Visualization:** Recharts (Customized for interactive simulation)
+- **Styling:** Tailwind CSS
 
-2. `npm install`
+## 🧩 How We Used Tambo
+Equilibrium leverages the Tambo SDK as its foundational Generative UI layer:
+- **Dynamic Component Projection:** We registered a custom `WealthSandbox` component in `src/lib/tambo.ts`. The AI agent analyzes user intent and projects this stateful, interactive tool directly into the chat.
+- **Contextual Tooling:** We used Tambo's tool registration to allow the AI to perform complex financial math (inflation adjustments, real-rate returns) before rendering the UI.
+- **Guided Interaction:** We customized the Tambo suggestion engine to provide "High-Potential" prompts, reducing friction for users who don't know where to start.
 
-3. `npx tambo init`
+## 🏃 Quick Start
 
-- or rename `example.env.local` to `.env.local` and add your tambo API key you can get for free [here](https://tambo.co/dashboard).
+1. **Clone & Install:**
+   ```bash
+   git clone [YOUR_REPO_LINK]
+   cd equilibrium-ai
+   npm install
 
-4. Run `npm run dev` and go to `localhost:3000` to use the app!
+2. **Environment Variable:** Create a `.env.local` file and add:
+   ```bash
+   NEXT_PUBLIC_TAMBO_API_KEY=your_key_here
 
-## Customizing
-
-### Change what components tambo can control
-
-You can see how components are registered with tambo in `src/lib/tambo.ts`:
-
-```tsx
-export const components: TamboComponent[] = [
-  {
-    name: "Graph",
-    description:
-      "A component that renders various types of charts (bar, line, pie) using Recharts. Supports customizable data visualization with labels, datasets, and styling options.",
-    component: Graph,
-    propsSchema: graphSchema,
-  },
-  // Add more components here
-];
-```
-
-You can install the graph component into any project with:
-
-```bash
-npx tambo add graph
-```
-
-The example Graph component demonstrates several key features:
-
-- Different prop types (strings, arrays, enums, nested objects)
-- Multiple chart types (bar, line, pie)
-- Customizable styling (variants, sizes)
-- Optional configurations (title, legend, colors)
-- Data visualization capabilities
-
-Update the `components` array with any component(s) you want tambo to be able to use in a response!
-
-You can find more information about the options [here](https://docs.tambo.co/concepts/generative-interfaces/generative-components)
-
-### Add tools for tambo to use
-
-Tools are defined with `inputSchema` and `outputSchema`:
-
-```tsx
-export const tools: TamboTool[] = [
-  {
-    name: "globalPopulation",
-    description:
-      "A tool to get global population trends with optional year range filtering",
-    tool: getGlobalPopulationTrend,
-    inputSchema: z.object({
-      startYear: z.number().optional(),
-      endYear: z.number().optional(),
-    }),
-    outputSchema: z.array(
-      z.object({
-        year: z.number(),
-        population: z.number(),
-        growthRate: z.number(),
-      }),
-    ),
-  },
-];
-```
-
-Find more information about tools [here.](https://docs.tambo.co/concepts/tools)
-
-### The Magic of Tambo Requires the TamboProvider
-
-Make sure in the TamboProvider wrapped around your app:
-
-```tsx
-...
-<TamboProvider
-  apiKey={process.env.NEXT_PUBLIC_TAMBO_API_KEY!}
-  components={components} // Array of components to control
-  tools={tools} // Array of tools it can use
->
-  {children}
-</TamboProvider>
-```
-
-In this example we do this in the `Layout.tsx` file, but you can do it anywhere in your app that is a client component.
-
-### Voice input
-
-The template includes a `DictationButton` component using the `useTamboVoice` hook for speech-to-text input.
-
-### MCP (Model Context Protocol)
-
-The template includes MCP support for connecting to external tools and resources. You can use the MCP hooks from `@tambo-ai/react/mcp`:
-
-- `useTamboMcpPromptList` - List available prompts from MCP servers
-- `useTamboMcpPrompt` - Get a specific prompt
-- `useTamboMcpResourceList` - List available resources
-
-See `src/components/tambo/mcp-components.tsx` for example usage.
-
-### Change where component responses are shown
-
-The components used by tambo are shown alongside the message response from tambo within the chat thread, but you can have the result components show wherever you like by accessing the latest thread message's `renderedComponent` field:
-
-```tsx
-const { thread } = useTambo();
-const latestComponent =
-  thread?.messages[thread.messages.length - 1]?.renderedComponent;
-
-return (
-  <div>
-    {latestComponent && (
-      <div className="my-custom-wrapper">{latestComponent}</div>
-    )}
-  </div>
-);
-```
-
-For more detailed documentation, visit [Tambo's official docs](https://docs.tambo.co).
+3. **Run Dev:**
+   ```bash
+    npm run dev

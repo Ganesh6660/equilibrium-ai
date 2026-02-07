@@ -16,6 +16,7 @@ import {
 } from "@/services/population-stats";
 import type { TamboComponent } from "@tambo-ai/react";
 import { TamboTool } from "@tambo-ai/react";
+import { WealthSandbox } from "@/components/WealthSandbox";
 import { z } from "zod";
 
 /**
@@ -99,4 +100,16 @@ export const components: TamboComponent[] = [
     propsSchema: dataCardSchema,
   },
   // Add more components here
+  {
+    name: "WealthSandbox",
+    description: "A financial simulation tool. Use this when the user asks 'What if' questions about retirement, savings, or long-term wealth.",
+    component: WealthSandbox,
+    propsSchema: z.object({
+      initialAmount: z.number().describe("Starting balance"),
+      monthlyContribution: z.number().describe("Monthly savings amount"),
+      years: z.number().describe("Duration of simulation in years"),
+      annualReturn: z.number().describe("Expected annual stock market return (as decimal, e.g. 0.08)"),
+      inflationRate: z.number().describe("Expected annual inflation (as decimal, e.g. 0.03)"),
+    }),
+  },
 ];
