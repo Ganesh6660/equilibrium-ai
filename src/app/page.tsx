@@ -65,7 +65,7 @@ export default function Home() {
       <div className="h-screen flex flex-col bg-gray-50">
         <header className="p-4 bg-white border-b shadow-sm">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 className="text-xl font-bold text-blue-600">Equilibrium.</h1>
+            <h1 className="text-xl font-bold text-blue-600">Equilibrium.ai</h1>
             <span className="text-xs font-mono bg-blue-100 text-blue-700 px-2 py-1 rounded tracking-tighter">Wealth Simulation</span>
           </div>
         </header>
