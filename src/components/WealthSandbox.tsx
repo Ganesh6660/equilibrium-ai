@@ -7,11 +7,13 @@ export const WealthSandbox = ({ initialAmount = 0, monthlyContribution = 0, year
   // Local state to allow the user to play with the return rate
   const [liveReturn, setLiveReturn] = useState(annualReturn ?? 0.05);
   // This says use annualReturn, but if it's missing, default to 5%
+  const [isOptimized, setIsOptimized] = useState(false);
 
   const data = [];
   let currentBalance = initialAmount;
   let delayBalance = initialAmount; // The "Wait 5 Years" version
   // Standard math for real rate of return
+  const annualBonus = isOptimized ? 0.02 : 0; // Adds 2% potential
   const realRate = (1 + liveReturn) / (1 + inflationRate) - 1;
   const [isPanicMode, setIsPanicMode] = useState(false);
 
@@ -47,6 +49,7 @@ export const WealthSandbox = ({ initialAmount = 0, monthlyContribution = 0, year
 
   const myGoal = 500000; // You can change this or pass it as a prop
   const goalYear = data.find(d => d.balance >= myGoal)?.year;
+
 
   return (
   <div className="p-0 overflow-hidden border-2 border-slate-200 rounded-3xl bg-white shadow-2xl w-full my-6 font-sans">
@@ -191,8 +194,13 @@ export const WealthSandbox = ({ initialAmount = 0, monthlyContribution = 0, year
             <p className="text-xs opacity-80 uppercase font-bold tracking-widest">Human Potential Insight</p>
             <p className="text-sm font-medium mt-1">To reach your goal 2 years faster, increase your monthly contribution by just $200.</p>
           </div>
-          <button className="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold text-sm shadow-lg hover:bg-blue-50 transition">
-            Optimize Plan
+          <button 
+            onClick={() => setIsOptimized(!isOptimized)}
+            className={`px-4 py-2 rounded-lg font-bold text-sm shadow-lg transition ${
+              isOptimized ? "bg-green-400 text-white" : "bg-white text-blue-600 hover:bg-blue-50"
+            }`}
+          >
+            {isOptimized ? "🚀 Plan Maximized" : "Optimize Plan"}
           </button>
         </div>
       </div>
